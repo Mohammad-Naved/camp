@@ -2,7 +2,12 @@
 <div class="row">
   <h1 class="text-center">Edit Campground</h1>
   <div class="col-6 offset-3">
-    <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST">
+    <form
+      class="needs-validation"
+      action="/campgrounds/<%=campground._id%>?_method=PUT"
+      method="POST"
+      novalidate
+    >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -11,7 +16,10 @@
           id="title"
           name="campground[title]"
           value="<%=campground.title %>"
+          required
         />
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please Enter the title.</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Location</label>
@@ -21,7 +29,10 @@
           id="location"
           name="campground[location]"
           value="<%=campground.location %>"
+          required
         />
+        <div class="invalid-feedback">Please Enter the Location.</div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="image">Image Url</label>
@@ -31,7 +42,10 @@
           id="image"
           name="campground[image]"
           value="<%=campground.image %>"
+          required
         />
+        <div class="invalid-feedback">Please Enter the ImageURL.</div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="price">Campground Price</label>
@@ -46,7 +60,10 @@
             aria-describedby="price-label"
             name="campground[price]"
             value="<%=campground.price %>"
+            required
           />
+          <div class="invalid-feedback">Please Enter the description.</div>
+          <div class="valid-feedback">Looks good!</div>
         </div>
       </div>
 
@@ -57,9 +74,11 @@
           type="text"
           id="description"
           name="campground[description]"
+          required
         >
 <%= campground.description%></textarea
         >
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-info">Update Campground</button>
@@ -68,3 +87,29 @@
     <a href="/campgrounds/<%= campground._id%>">Back To Campground</a>
   </div>
 </div>
+
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
